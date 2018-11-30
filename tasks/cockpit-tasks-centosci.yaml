@@ -23,9 +23,14 @@ items:
             value: '8'
           - name: TEST_PUBLISH
             value: sink
+          - name: AMQP_URL
+            value: 'amqp.cockpit.svc.cluster.local:5671'
           volumeMounts:
           - name: secrets
             mountPath: "/secrets"
+            readOnly: true
+          - name: webhook-secrets
+            mountPath: /run/secrets/webhook
             readOnly: true
           - name: cache
             mountPath: "/cache"
@@ -40,6 +45,9 @@ items:
         - name: secrets
           secret:
             secretName: cockpit-tasks-secrets
+        - name: webhook-secrets
+          secret:
+            secretName: webhook-secrets
         - name: cache
           emptyDir: {}
         - name: images

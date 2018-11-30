@@ -46,7 +46,6 @@ RUN dnf -y update && \
         python-lxml \
         python-scikit-learn \
         python3 \
-        python3-pika \
         python3-scikit-learn \
         rpm-build \
         rpmdevtools \
@@ -63,6 +62,8 @@ RUN dnf -y update && \
     dnf clean all
 
 COPY cockpit-tasks install-service webhook github_handler.py /usr/local/bin/
+
+RUN pip3 install pika
 
 RUN mkdir -p /usr/local/bin /home/user /build /secrets /cache/images /cache/github /build/libvirt/qemu && \
     usermod -a -G mock user && \

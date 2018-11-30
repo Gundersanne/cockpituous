@@ -17,6 +17,19 @@ items:
           infra: webhook
       spec:
         containers:
+          - name: amqp
+            image: cockpit/amqp
+            ports:
+            - containerPort: 5671
+              protocol: TCP
+              name: amqp
+            - containerPort: 5672
+              protocol: TCP
+              name: amqp
+            volumeMounts:
+            - name: webhook-secrets
+              mountPath: /run/secrets/webhook
+              readOnly: true
           - name: webhook
             image: cockpit/tasks
             ports:
@@ -57,3 +70,34 @@ items:
       name: webhook
     port:
       targetPort: 8080
+
+- kind: Service
+  apiVersion: v1
+  metadata:
+    name: amqp
+  spec:
+    clusterIP: None
+    selector:
+      infra: webhook
+    ports:
+    - targetPort: 5671
+      port: 5671
+      protocol: TCP
+      name: amqp
+    - targetPort: 5672
+      port: 5672
+      protocol: TCP
+      name: amqp
+
+- kind: Route
+  apiVersion: v1
+  metadata:
+    name: amqp
+  spec:
+    to:
+      kind: Service
+      name: amqp
+    port:
+      targetPort: 5671
+    tls:
+      termination: passthrough
