@@ -103,3 +103,18 @@ learn-container:
 
 learn-push:
 	base/push-container docker.io/cockpit/learn
+
+amqp-shell:
+	$(DOCKER) run -ti --rm \
+		--publish=5671:5671 \
+		--volume=$(TASK_SECRETS):/run/webhook/secrets:ro \
+		--entrypoint=/bin/bash \
+        docker.io/cockpit/amqp -i
+
+amqp-container:
+	docker build -t docker.io/cockpit/amqp:$(TAG) amqp
+	docker tag docker.io/cockpit/amqp:$(TAG) docker.io/cockpit/amqp:latest
+	docker tag docker.io/cockpit/amqp:$(TAG) cockpit/amqp:latest
+
+amqp-push:
+	base/push-container docker.io/cockpit/amqp

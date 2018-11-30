@@ -1,0 +1,50 @@
+{
+    "users": [
+        {
+            "name": "cockpit-tests",
+            "password_hash":"pB0/JnjGQ9tS8/w9gU7Fx8yRsquH54tnX3bufGZ0KQqho5Wz",
+            "hashing_algorithm":"rabbit_password_hashing_sha256",
+            "tags": ""
+        },
+        {
+            "name": "cockpit-amqp",
+            "password_hash":"pB0/JnjGQ9tS8/w9gU7Fx8yRsquH54tnX3bufGZ0KQqho5Wz",
+            "hashing_algorithm":"rabbit_password_hashing_sha256",
+            "tags": ""
+        },
+        {
+            "name": "worky",
+            "password_hash":"pB0/JnjGQ9tS8/w9gU7Fx8yRsquH54tnX3bufGZ0KQqho5Wz",
+            "hashing_algorithm":"rabbit_password_hashing_sha256",
+            "tags": ""
+        }
+    ],
+    "vhosts": [
+        {
+            "name": "/"
+        },
+    ],
+    "permissions": [
+        {
+            "user": "cockpit-tests",
+            "vhost": "/",
+            "configure": ".*",
+            "write": ".*",
+            "read": ".*"
+        },
+        {
+            "user": "worky",
+            "vhost": "/",
+            "configure": ".*",
+            "write": ".*",
+            "read": ".*"
+        },
+        {
+            "user": "cockpit-amqp",
+            "vhost": "/",
+            "configure": ".*",
+            "write": ".*",
+            "read": ".*"
+        }
+    ]
+}
