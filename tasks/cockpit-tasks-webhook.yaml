@@ -57,3 +57,32 @@ items:
       name: webhook
     port:
       targetPort: 8080
+
+- kind: Pod
+  apiVersion: v1
+  metadata:
+    name: amqp
+    labels:
+      infra: amqp
+  spec:
+    containers:
+      - name: amqp
+        image: docker.io/rabbitmq
+        ports:
+          - containerPort: 5672
+            protocol: TCP
+            name: amqp
+
+- kind: Service
+  apiVersion: v1
+  metadata:
+    name: amqp
+  spec:
+    clusterIP: None
+    selector:
+      infra: amqp
+    ports:
+    - targetPort: 5672
+      port: 5672
+      protocol: TCP
+      name: amqp
