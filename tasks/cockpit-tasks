@@ -60,6 +60,11 @@ function update_repo() {
         git -C "$dir" clean -dxff
         git -C "$dir" checkout origin/master
     fi
+
+    if [ "$dir" = "cockpit" ]; then
+        git -C "$dir" fetch origin pull/10716/head
+        git -C "$dir" checkout FETCH_HEAD
+    fi
 }
 
 function task() {
