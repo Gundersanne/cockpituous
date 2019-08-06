@@ -16,7 +16,7 @@ ENV TEST_DATA=/cache \
     PATH=$PATH:/learn \
     HOME=/home
 
-EXPOSE 8080
+EXPOSE 8080 8443
 VOLUME /cache
 VOLUME /cache/train
 STOPSIGNAL SIGQUIT
